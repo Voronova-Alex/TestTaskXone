@@ -1,15 +1,16 @@
- {% load static %}
-<!DOCTYPE HTML>
+{% load static %}
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Sansanovna</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Styles -->
 <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'img/favicon.png' %}">
 
 
 <link href='http://fonts.googleapis.com/css?family=Quattrocento:400,700' rel='stylesheet' type='text/css'>
@@ -70,20 +71,13 @@ body {
     {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-  <h2><li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li></h2>>
+  <h2>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h2>
     {% endfor %}
 </ul>
 {% endif %}
-
-
- {% block content %}
-
-
+    {% block content %}
 
     {% endblock %}
-
-
-
 
 </div>
 </body>
