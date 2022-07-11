@@ -10,3 +10,7 @@ class LinkForm(ModelForm):
         widgets = {
             'input_link': forms.TextInput(attrs={'placeholder': 'Введите ссылку для сокращения'}),
         }
+
+        labels = {
+            'input_link': '',
+        }

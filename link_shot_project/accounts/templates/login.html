@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Авторизироваться</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form}}
+        <br><br><br>
+        <input type="submit" value="Войти" class="cform-submit"></button>
+
+        </form>
+    <table align="center">
+        <tr>
+        <td><a href="{% url 'password_reset' %}" class="btn btn-large">Забыли пароль?</a></td>
+        <td><a href="{% url 'signup' %}" class="btn btn-large">Регистрация</a></td>
+        <td><a href="{% url 'home' %}" class="btn btn-large">Назад</a></td>
+        </tr>
+    </table>
+
+{% endblock content %}

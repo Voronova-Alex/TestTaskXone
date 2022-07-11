@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+{% csrf_token %}
+
+<table class="table table-bordered">
+
+    <tr>
+        <th><h2>Было</h2></th>
+        <th><h2>Стало</h2></th>
+    </tr>
+
+    {% for object in object_list%}
+    <tr>
+        <th><input type="text" name="ссылка" value={{ object.input_link }} ></th>
+        <th><input type="text" name="ссылка" value={{ object.output_link }} ></th>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+
+
+
+
+
+
+
+            </div>
+          </div>
+            </div>
+           </header>
+          </div>
+{% endblock content %}

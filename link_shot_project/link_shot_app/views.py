@@ -1,25 +1,30 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import FormView
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from .forms import LinkForm
 from .models import Links
 from .utils import gen_link
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
-class LinkFormView(LoginRequiredMixin, FormView):
-    template_name = 'contact.html'
+def relink(request, data):
+    if Links.objects.filter(output_link=request.build_absolute_uri('/') + data).exists():
+        obj = Links.objects.get(output_link=request.build_absolute_uri('/') + data)
+        link = obj.input_link
+        return redirect(link)
+
+
+class LinkFormView(CreateView):
+    template_name = 'home.html'
     form_class = LinkForm
-    model = Links
 
     def form_valid(self, form):
-        if Links.objects.filter(input_link=form.input_link).exists():
-            return render('contact.html', {'input_link': form.input_link,
-                                           'output_link': Links.objects.filter(input_link=form.input_link).output_link})
-        else:
-            link = Links(user=self.request.user, input_link=form.input_link, output_link=gen_link(form.input_link))
-            link.save()
-            return render('contact.html', {'input_link': form.input_link, 'output_link': gen_link(form.input_link)})
+        instance = form.save(commit=False)
+        if not Links.objects.filter(input_link=instance.input_link, user=self.request.user).exists():
+            instance.user = self.request.user
+            instance.output_link = self.request.build_absolute_uri('/') + gen_link()
+            instance.save()
+        return render(self.request, 'link.html', {'link': instance.input_link,
+                                       'new_link': Links.objects.get(input_link=instance.input_link, user=self.request.user).output_link})
 
 
 class LinksListView(LoginRequiredMixin, ListView):

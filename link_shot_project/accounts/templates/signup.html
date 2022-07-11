@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Заргестрироваться</h2>
+
+
+        <form method = 'POST' >
+            {% csrf_token %}
+            {{form}}
+        <br><br><br>
+            <input type="submit" value="Готово" class="cform-submit"></button>
+        </form>
+
+
+{% endblock content %}

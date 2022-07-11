@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Информация о пользователе{% endblock title %}
+
+{% block content %}
+    <h2>Информация о пользователе</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+         <br><br><br>
+        <input type="submit" value=Обновить class="cform-submit"></button>
+    </form>
+        <table align="center">
+        <tr>
+
+        <td><a href="{% url 'change_password' %}"  class="btn btn-large">Сменить пароль</a></td>
+        <td><a href="{% url 'home' %}"  class="btn btn-large">Назад</a></td>
+        </tr>
+        </table>>
+
+{% endblock content %}

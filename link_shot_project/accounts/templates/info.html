@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+    <h1>Информация о пользователе</h1>
+    <h2>Привет, {{user.username}}</h2>
+    <h2>Твой email - {{user.email}}</h2>
+    <table align="center">
+        <tr>
+
+    <th><a href="{% url 'profile' user.pk %}" class="btn btn-large" >Редактировать</a></th>
+    <th><a href="{% url 'links'%}" class="btn btn-large">Ссылки</a></th>
+    <th><a href="{% url 'logout' %}" class="btn btn-large">Выйти</a></th>
+        </tr>
+    </table>
+    {% else %}
+    <h2>Пожалуйста, авторизуйтесь</h2>
+    <a href="{% url 'login' %}" class="btn btn-info btn-xs" > <i class="fa fa-pencil"></i>Войти</a>
+    {% endif %}
+
+{% endblock content %}

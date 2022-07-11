@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- ******************** HeaderWrap ********************-->
+{% if user.is_authenticated %}
+    <div id="headerwrap">
+      <header class="clearfix">
+        <h1><span>Сократиль!</span> Сократите ссылку в 1 клик.</h1>
+        <div class="container">
+          <div class="row">
+            <div class="span12">
+              <h2>Вставьте ссылку для сокращения</h2>
+               <form method = 'POST'>
+
+
+                {% csrf_token %}
+                {{form}}
+              <input type="submit" value="Жмяк" class="cform-submit">
+    </form>
+
+
+            </div>
+          </div>
+            </div>
+           </header>
+          </div>
+{% else %}
+<h2>Авторизируйся или Зарегистрируйся</h2>
+{% endif %}
+
+
+
+{% endblock content %}
