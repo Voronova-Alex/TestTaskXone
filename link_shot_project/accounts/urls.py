@@ -1,7 +1,8 @@
-from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.urls import path
 from django.views.generic import TemplateView
-from .views import SignUpView, ProfileView, ActivateAccount
+
+from .views import ActivateAccount, ProfileView, SignUpView
 
 urlpatterns = [
     path('info/', TemplateView.as_view(template_name='info.html'), name='info'),
@@ -10,8 +11,8 @@ urlpatterns = [
     path('profile/<int:pk>/', ProfileView.as_view(), name='profile'),
     path('change-password/',
          auth_views.PasswordChangeView.as_view(
-            template_name='change-password.html',
-            success_url='/'
+             template_name='change-password.html',
+             success_url='/'
          ),
          name='change_password'),
     path('password-reset/',
@@ -39,13 +40,12 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(
         redirect_authenticated_user=True,
         template_name='login.html'
-        ),
-        name='login'
     ),
+         name='login'
+         ),
     path('logout/', auth_views.LogoutView.as_view(
         next_page='info'
-        ),
-        name='logout'
     ),
-
+         name='logout'
+         ),
 ]

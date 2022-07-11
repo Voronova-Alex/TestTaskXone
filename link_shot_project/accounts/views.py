@@ -1,16 +1,15 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views.generic import View, UpdateView
-from .forms import SignUpForm, ProfileForm
 from django.contrib import messages
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from django.template.loader import render_to_string
 from django.contrib.auth import login
 from django.contrib.auth.models import User
-from django.utils.encoding import force_text
-from django.utils.http import urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.views.generic import UpdateView, View
+
+from .forms import ProfileForm, SignUpForm
 from .tokens import account_activation_token
 
 
@@ -40,7 +39,7 @@ class SignUpView(View):
             user.email_user(subject, message)
 
             messages.success(request,
-                             'Пожалуйста, подтвердите свой адрес электронной почты, чтобы завершить регистрацию.')
+                             'Пожалуйста, подтвердите свой адрес электронной почты \n, чтобы завершить регистрацию.')
 
             return redirect('info')
 
@@ -65,7 +64,7 @@ class ActivateAccount(View):
             return redirect('info')
         else:
             messages.warning(request, (
-                'Ссылка для подтверждения недействительна, возможно, потому, что она уже использовалась.'))
+                'Ссылка для подтверждения недействительна, \n возможно, потому, что она уже использовалась.'))
             return redirect('info')
 
 

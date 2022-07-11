@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView
+from django.shortcuts import redirect, render
+from django.views.generic import CreateView, ListView
+
 from .forms import LinkForm
 from .models import Links
 from .utils import gen_link
-from django.shortcuts import render, redirect
 
 
 def relink(request, data):
