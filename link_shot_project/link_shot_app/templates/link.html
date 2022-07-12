@@ -2,8 +2,6 @@
 {% block content %}
 
  <div id="top"></div>
-    <!-- ******************** HeaderWrap ********************-->
-    <form method = 'POST'>
     <div id="headerwrap">
       <header class="clearfix">
         <div class="container">
@@ -12,20 +10,13 @@
               <h2>Старая ссылка</h2>
                 {% csrf_token %}
                 <input type="text" name="ссылка" value={{link}} class="cform-text" size="40" title="your email">
-
                 <h2>Новая ссылка</h2>
-                 <input type="text" name="ссылка" value={{new_link}} class="cform-text" size="40" title="your email">
-
-
-
-
+                <input type="text" name="ссылка" value={{new_link}} class="cform-text" size="40" title="your email">
             </div>
           </div>
-            </div>
-           </header>
-          </div>
-
-
-
+        </div>
+      </header>
+    </div>
+</div>
 
 {% endblock content %}
